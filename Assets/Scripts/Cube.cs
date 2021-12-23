@@ -13,21 +13,22 @@ public class Cube : MonoBehaviour
 
     private void Awake()
     {
+        _counter = _timeToLive;
         _position = transform.position;
         _rotation = transform.rotation;
     }
 
     private void OnEnable()
     {
-        _counter = 0;
+        _timeToLive = _counter;
         transform.position = _position;
         transform.rotation = _rotation;
     }
 
     private void Update()
     {
-        _counter += Time.deltaTime;
-        if (_counter > _timeToLive)
+        _timeToLive -= Time.deltaTime;
+        if (_timeToLive < 0)
         {
             gameObject.SetActive(false);
         }
